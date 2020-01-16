@@ -1,0 +1,48 @@
+- name: Global AppSec Dublin
+  type: global
+  start-date: 2020-06-15
+  dates: June 15-19, 2020
+  url: https://dublin.globalappsec.org
+  optional-text: Registration Opens February 1, 2020
+- name: Global AppSec San Francisco
+  type: global
+  start-date: 2020-10-19
+  dates: October 19-23, 2020
+  url: https://sf.globalappsec.org
+  optional-text: Registration Opens March 1, 2020
+- name: AppSec California 2020
+  type: local
+  start-date: 2020-01-21
+  dates: January 21-24, 2020
+  url: https://2020.appseccalifornia.org/
+  optional-text: Santa Monica, CA
+- name: OWASP New Zealand Day 2020
+  type: local
+  start-date: 2020-02-19
+  dates: February 19-21, 2020
+  url: https://www.owasp.org/index.php/OWASP_New_Zealand_Day_2020
+  optional-text: Auckland, New Zealand
+- name: OWASP Seasides
+  type: local
+  start-date: 2020-03-03
+  dates: March 3-5, 2020
+  url: https://www.owaspseasides.com/
+  optional-text: Panjim Goa, India
+- name: SnowFROC 2020
+  type: local
+  start-date: 2020-03-05
+  dates: March 5, 2020
+  url: https://www.snowfroc.com/
+  optional-text: Denver, Colorado
+- name: AppSec Morocco & Africa 2020
+  type: local
+  start-date: 2020-06-04
+  dates: June 4-5, 2020
+  url: https://2020.appsecmorocco.org/
+  optional-text: Rabat, Morocco
+- name: LASCON 2020
+  type: local
+  start-date: 2020-10-29
+  dates: October 29-30, 2020
+  url: https://lascon.org/
+  optional-text: Austin, TX USA
