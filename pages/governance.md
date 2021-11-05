@@ -6,7 +6,7 @@ permalink: /governance/
 
 ---
 
-The OWASP Foundation, Inc. is a United States 501(c)3 nonprofit charity governed by the Global Board and administered by its executive director, staff, and contractcors. Volunteers contribute to the mission of the Foundation and lead projects and local chapters worldwide.
+The OWASP Foundation, Inc. is a United States 501(c)3 nonprofit charity governed by the Global Board and administered by its executive director, staff, and contractors. Volunteers contribute to the mission of the Foundation and lead projects and local chapters worldwide.
 
 ## Goals for 2020
 1. Launch updated version of OWASP Top 10 by June 2020.
@@ -22,10 +22,11 @@ The OWASP Foundation, Inc. is a United States 501(c)3 nonprofit charity governed
 - [Meeting Typical Agenda](/www-board/typical_agenda)
 - [Historical Board Actions](/www-board/#div-voting)
 - [Board Member Commitment Agreement](/www-policy/legal/directors-committment-agreement)
-- Board Elections
+- [Board Elections](/www-board/elections/)
 
 ## Governing Documents
-- [OWASP Foundation By-Laws](/assets/legal/bylaws)
+- [OWASP Foundation By-Laws](/www-policy/legal/bylaws)
+- [OWASP Certificate and Articles of Incorporation](/assets/legal/OWASP-DE-Certificate-of-Incorporation-2004.pdf){:target='_blank'}
 - [General Disclaimer](/www-policy/operational/general-disclaimer)
 - [Privacy Policy](/www-policy/operational/privacy)
 - [Conflict Resolution](/www-policy/operational/conflict-resolution)
@@ -36,7 +37,7 @@ The OWASP Foundation, Inc. is a United States 501(c)3 nonprofit charity governed
 - [Foundational Staff](/corporate)
 - [Operating Plan for 2020](/www-staff/operating-plan/2020)
 - [Budget for 2020](/www-staff/budget/2020)
-- [Staff Projects & Worklplans](/www-staff)
+- [Staff Projects & Work plans](/www-staff)
 
 ## Code of Conduct
 - Perform all professional activities and duties in accordance with all applicable laws and the highest ethical principles;

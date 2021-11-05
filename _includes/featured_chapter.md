@@ -1,6 +1,11 @@
+## [Featured Event: OWASP Global AppSec US 2021](https://usa.globalappsec.org/)
 
-## [Featured Chapter: Bay Area](#)
+![OWASP Global AppSec US 2021 Virtual](/assets/images/content/featured_event_usa.png){:class="featured-proj-image"}
 
-<a><img src="/assets/images/content/bay-area2.png" alt="Bay Area Chapter Meeting"></a>
+Global AppSec US Virtual 2021 returns Nov. 11-12, 2021. Designed for private and public sector infosec professionals, the two day OWASP conferences equip developers, defenders, and advocates to build a more secure web.
 
-Hosted at some of most iconic technology companies in the world, the Bay Area chapter is one of the Foundation's largest and most active. This month they are hosting a Hacker Day and monthly meetups in San Francisco at Insight Engines and in South Bay at EBay. Usually the agenda includes three provactive and interesting talks, lots of interesting people to meet, and great food. The Bay Area Chapter also participates in planning AppSec California.
+Join us for leading application security technologies, speakers, prospects, and community, in a unique event that will build on everything you already know to expect from an OWASP Global Conference.     
+
+[Read more..](/events/spotlight/)
+
+

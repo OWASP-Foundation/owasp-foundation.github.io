@@ -3,19 +3,26 @@
 layout: home
 title: OWASP Foundation, the Open Source Foundation for Application Security 
 permalink: /
+tags: Application Security, Cyber Security, Information Security, Web, Cloud, Vulnerability Assessment
 
 ---
+{% assign spnews_exists = False %}
+{% for file in site.static_files %}
+{% if file.name contains '_includes/specialnews.md' %}
+{% assign spnews_exists = True %}
+{% endif %}
+{% endfor %}
+<!-- Rebuild Site Tag 171 -->
 
-<!-- Rebuild Site Tag 12 -->
-<div class="homepage-promo">
-  <img src="/assets/images/content/ams-preso-new.png" alt="Presentation at Global AppSec AMS">
+<div class="homepage-promo" style='background: url(/assets/images/content/ams-preso-new.jpg) no-repeat center center;background-size: cover;'>
+  <!--<img src="/assets/images/content/ams-preso-new.jpg" alt="Presentation at Global AppSec AMS">-->
 </div>
 
  <hr class="mobile">
 
 <section class="homepage-welcome">
-  <h1>Who is the OWASP Foundation?</h1>
-<p>The Open Web Application Security Project (OWASP) is a nonprofit foundation that works to improve the security of software. Through community-led open source software projects, hundreds of local chapters worldwide, tens of thousands of members, and leading educational and training conferences, the OWASP Foundation is the source for developers and technologists to secure the web.</p>
+  <h1>Who is the OWASP<sup>&reg;</sup> Foundation?</h1>
+  <p>The Open Web Application Security Project<sup>&reg;</sup> (OWASP) is a nonprofit foundation that works to improve the security of software. Through community-led open-source software projects, hundreds of local chapters worldwide, tens of thousands of members, and leading educational and training conferences, the OWASP Foundation is the source for developers and technologists to secure the web.</p>
 
 <ul>
 <li>Tools and Resources</li>
@@ -23,7 +30,7 @@ permalink: /
 <li>Education & Training</li>
 </ul>
 
-<p>For nearly two decades corporations, foundations, developers, and volunteers have supported the OWASP Foundation and its work. <a href="/donate">Donate</a>, <a href="/membership">Join</a>, or become a <a href="/supporters">Corporate Member</a> today.</p>
+<p>For nearly two decades corporations, foundations, developers, and volunteers have supported the OWASP Foundation and its work. <a href="/donate/">Donate</a>, <a href="/membership/">Join</a>, or become a <a href="/supporters">Corporate Member</a> today.</p>
 </section>
 
 <hr>
@@ -52,3 +59,5 @@ permalink: /
 <hr class="mobile">
 
 {% include news-events.html %}
+
+{% comment %}{% include specialnews.md %}{% endcomment %}

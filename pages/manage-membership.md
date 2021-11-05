@@ -44,6 +44,12 @@ permalink: /manage-membership/
   background-color: #dc3545;
 }
 
+input[type='radio'] {
+  margin-right: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 @media (min-width: 768px) {
   .form-container {
     max-width: 70%;
@@ -61,14 +67,14 @@ permalink: /manage-membership/
       <h1>Manage Your Information</h1>
 
       <div v-if="state === 'unsubmitted'">
-        <p>If you have an existing OWASP membership or recurring gift, enter your address below and you will receive an email response that includes an URL which you can visit to update your billing information.</p>
+        <p>If you have an existing OWASP membership or recurring gift, enter your address (case sensitive) below and you will receive an email response that includes an URL which you can visit to update your billing information, see your membership data, and provision your owasp email address.</p>
         <form v-on:submit.prevent="handleSubmit" class="form-container">
         <div class="error-text" style="font-size: 90%; margin-bottom: 16px" id="error-message" v-if="Object.keys(errors).length">
           Please correct the errors below before proceeding.
         </div>
         <div style="margin-bottom: 18px;">
         <input type="text" v-model="email" v-on:input="updateErrors" aria-label="Email Address"
-        placeholder="Email Address" />
+        placeholder="Email Address (case sensitive)" />
         <div class="error-text" v-if="errors.email">
         {{ errors.email[0] }}
         </div>
@@ -93,6 +99,10 @@ permalink: /manage-membership/
             </div>
             <div v-if="userData.membership.membership_end">
               <strong>Membership {{ userData.membership.membership_recurring ? 'Automatically Renews On' : 'Ends On' }}:</strong> {{ userData.membership.membership_end }}
+            </div>
+            <div v-if="userData.membership.owasp_email">
+              <strong>OWASP Email Address:</strong> {{ userData.membership.owasp_email }}
+              <p>To access your OWASP email, please go to <a href="https://mail.google.com">Google Mail</a> and logout of any current account or click Add another account.  Choose 'Forgot password' and 'try another way' then 'receive a verification code'.</p>
             </div>
           </div>
           <div v-if="memberships.length > 0" style="margin-bottom: 40px;">
@@ -123,6 +133,29 @@ permalink: /manage-membership/
               </div>
             </div>
           </div>
+          <div v-if="provision_email_message == true">
+               <h2>Your chosen email was created.  Please go to <a href="https://mail.google.com">Google Mail</a> and logout of any current account or click Add another account.  Choose 'Forgot password' and 'try another way' then 'receive a verification code'.</h2>
+          </div>
+          <div id="email-section" v-if="userData.emaillist.length > 0">
+            <hr>
+            <h3>Provision Your OWASP Email</h3>
+            <div v-if="userData.emaillist.length > 1">
+              Choose one from the list below:<br>
+              (If you already have an OWASP email, please do not provision another)
+              <hr>
+            </div>
+            <div v-for="error in errors">
+              <label class="error-text" id="provision-error">{{error[0]}}</label>
+            </div>
+            <div v-for="em in userData.emaillist">
+              <div style="display: inline-block;">
+                <input type="radio" name="email_provision" v-model="chosen_email" v-bind:value="em"> &nbsp;&nbsp;{{em}}
+              </div>
+            </div>
+            <div style="margin-top: 20px;">
+              <button class="submit-button" v-on:click="redirectToAzure()" v-bind:disabled="provision_disabled">{{provision_message}}</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -142,7 +175,7 @@ permalink: /manage-membership/
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
 
 <script>
-var stripe = Stripe('pk_test_u4OyMFMbz6tp9sit2bjdHRnT00bac5mrL2');
+var stripe = Stripe('pk_live_mw0B2kiXQTFkD44liAEI03oT00S5AGfSV3');
 window.addEventListener('load', function () {
   new Vue({
     el: '#manage-membership-app',
@@ -153,10 +186,15 @@ window.addEventListener('load', function () {
       token: null,
       state: 'unsubmitted',
       userData: {
-        subscriptions: []
+        subscriptions: [],
+        emaillist: []
       },
       loadingUserData: true,
-      pendingCancellation: null
+      pendingCancellation: null,
+      chosen_email: '',
+      provision_email_message: false,
+      provision_message: 'Provision',
+      provision_disabled: false
     },
     created: function () {
       const queryParams = new URLSearchParams(window.location.search);
@@ -210,6 +248,7 @@ window.addEventListener('load', function () {
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
           errors.email = ['Please enter a valid email address'];
         }
+
         this.errors = errors;
       },
       updateErrors: function () {
@@ -228,6 +267,35 @@ window.addEventListener('load', function () {
             vm.userData = response.data.data;
             vm.loadingUserData = false;
           });
+      },
+      redirectToAzure: function () {
+        let vm = this;
+        if(!vm.chosen_email || vm.chosen_email == '')
+        {
+          let errors = {};
+          errors.chosen_email = ['Please choose an email address.'];
+          this.errors = errors;
+          vm.$nextTick(function () {
+                document.getElementById('provision-error').scrollIntoView();
+              })
+          return;
+        }
+        vm.provision_message = 'Please wait...(this may take some time)';
+        vm.provision_disabled = true;
+
+        const postData = {
+          token: this.token,
+          email: vm.chosen_email
+        };
+        
+        axios.post('https://owaspadmin.azurewebsites.net/api/provisionemail?code=KpGlIqooyYW3GYEHuYTYzRmwSiVbeGQ4xRRarY7UWhBLwoRASFVn3g==', postData)
+          .then(function (response) {
+                vm.userData.emaillist = []
+                vm.provision_email_message = true
+          }).catch(function (error) {
+              vm.errors = [error]
+            });
+  
       },
       redirectToStripe: function (sessionId) {
         stripe.redirectToCheckout({
@@ -257,3 +325,4 @@ window.addEventListener('load', function () {
   })
 }, false)
 </script>
+

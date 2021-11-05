@@ -5,6 +5,11 @@ title: Content Tags & Components Sample
 permalink: /sample/
 
 ---
+
+{% for m in site.data.tstmenu %}
+Title: {{m.title}}
+{% endfor %}
+
 <div>
   <p style="font-size: 40px; background-color: whitesmoke;">Content tags</p>
   
@@ -19,9 +24,11 @@ permalink: /sample/
   <p><em>This is an italicized text.</em></p>
   <p><strong>This is a bold text.</strong></p>
   <blockquote>This is a quote.</blockquote>
+  <p><s>This is a strikethrough text.</s></p>
   <p><a href="#">This is a link.</a></p>
-  <s>This is a strikethrough text.</s>
 
+  [Link with empty target window](/www-policy/operational/donations){:target="_blank" rel="noopener"}
+  
   <ol>
     <li>Ordered list item 1</li>
     <li>Ordered list item 2</li>
@@ -44,15 +51,22 @@ permalink: /sample/
 
 <p>(Everything in this section requires the use of CSS classes.)</p>
 
-
+<ul>
+  <li>
 <button class="cta-button">This is a CTA button</button>
 
 <button class="cta-button dark">This is a dark CTA button</button>
 
 <button class="cta-button green">This is a green CTA button</button>
-
+</li>
+<li>
 <button class="cta-button grey">This is a grey CTA button</button>
 
+<button class="cta-button white">This is a white CTA button</button>
+
+<button class="cta-button red">This is a red CTA button</button>
+</li>
+</ul>
 
 <a class="callout-link">This is a stand alone full-block link component</a>
 

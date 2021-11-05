@@ -1,172 +1,26 @@
 ---
 
 layout: full-width
-title: OWASP Membership
+title: OWASP Membership Information & Benefits
 permalink: /membership/
 
 ---
 
 <style>
 [v-cloak] {display: none}
-
-#membership-app input:focus, #membership-app select:focus {
-  outline: none;
-}
-
-.legal-text {
-  font-size: 75%;
-  color: #808080;
-}
-
-.form-container {
-  margin: 40px 0px;
-  max-width: 100%;
-}
-
-.error-text {
-  color: #ff0000;
-  font-size: 75%;
-  margin-top: 4px !important;
-}
-
-.form-container input, .form-container select {
-  width: 100%;
-  border: 1px solid #000000;
+.shared-header {
+  width: 50%;
+  display: inline;
   padding: 8px;
+  border-left: 2px solid darkgray;
+  border-top: 2px solid darkgray;
+  border-right: 2px solid darkgray;
+  border-radius: 4px;
+  margin-right: 6px;
 }
 
-.form-container select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: #ffffff;
-  border-radius: 0px;
-  font-size: 18px;
-  padding: 9px;
-}
-
-.form-row {
-  margin-bottom: 20px;
-}
-
-.membership-option {
-  text-align: center;
-  background-color: #D3D3D3;
-  color: #000000;
-  padding: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.membership-option.selected {
-  background-color: #233e81;
-  color: #ffffff;
-}
-
-.checkbox-container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.checkbox-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkbox-container .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-
-.checkbox-container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-.checkbox-container input:checked ~ .checkmark {
-  background-color: #233e81;
-}
-
-.checkbox-container .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.checkbox-container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-.checkbox-container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.membership-fields {
-  margin-bottom: 40px;
-}
-
-.membership-fields div {
-  margin: 14px 0px;
-}
-
-.membership-button {
-  border: 0;
-  padding: 16px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #233e81;
-  text-transform: uppercase;
-  font-size: 110%;
-}
-
-@media (min-width: 768px) {
-  .form-container {
-    max-width: 70%;
-  }
-
-  .form-row {
-    display: flex;
-  }
-
-  .form-row div:not(:last-child) {
-    margin-right: 10px;
-  }
-
-  .membership-option {
-    flex: 1;
-    flex-basis: 0;
-  }
-
-  .quarter {
-    flex: 1;
-    flex-basis: 25%;
-  }
-
-  .three-fourths {
-    flex: 1;
-    flex-basis: 75%;
-  }
+.unselected {
+  background: lightgray;
 }
 </style>
 
@@ -179,20 +33,19 @@ permalink: /membership/
 
       <!-- main membership form -->
 
-      <h1>Individual Membership</h1>
+      <div style='margin-top: 8px; margin-bottom: 8px;'><h1 class='shared-header'>Individual Membership</h1><h1 class='shared-header unselected'><a href="/supporters/">Corporate Membership</a></h1></div>
       <img src="/assets/images/web//members-header.png" alt="Attendees at a Global AppSec Conference">
+      <p>One of many ways you can get involved in the OWASP Foundation is to become a member. It is through our global membership that we move forward on our mission to secure the web. We encourage and support diversity in AppSec and hope you will join us. <strong>Please note we also offer regional pricing to make OWASP accessible to everyone.</strong></p> 
 
-      <p>One of many ways you can get involved in the OWASP Foundation is to become a member. It is through our global membership that we move forward on our mission to secure the web. We encourage and support diversity in AppSec and hope you will join us. Please note we also offer regional pricing to make OWASP accessible to everyone. There are many benefits to membership including:</p>
-      <ul>
-      	<li>Ongoing Support of our work</li>
-	<li>Discounted Conference Fees</li>
-	<li>Corporate owasp.org email address</li>
-	<li>Priority access to Travel Grants</li>
-	<li>And many others...</li>
-      </ul>
-      <p>You can <a href="/manage-membership">Manage your Membership</a> to renew an existing plan or modify billing details. Looking to have your business become a <a href="/supporters">Corporate Member</a>? </p>
-
-      <h2>Join Now</h2>
+<!-- The member_benefits page is found at https://github.com/OWASP/owasp.github.io/blob/main/_includes/member_benefits.md-->
+{% endraw %}
+      {% include member_benefits.md %}
+{% raw %}
+      <!--<div class='alert'>Lifetime Memberships are now 10% off as part of the <a href="https://20thanniversary.owasp.org">OWASP 20th Anniversary Celebration</a></div>-->
+      <p>Membership starts at $50 USD (or <a href="/membership?student=yes">$20 for students</a>) and, as noted above, there are discounts depending on your region.</p>
+      <p>You can also <a href="/manage-membership">Manage your Membership</a> to provision an OWASP email address, check your renewal date or, for recurring donations and memberships, update billing details or cancel the recurring bill.</p>
+      <p>Would your business like to become a <a href="/supporters">Corporate Member</a>? </p>
+      <h2>Join or Renew Now</h2>
       <form class="form-container" v-on:submit.prevent="handleSubmit">
         <div class="error-text" style="font-size: 90%; margin-bottom: 16px" id="error-message" v-if="Object.keys(errors).length">
           Please correct the errors below before proceeding.
@@ -217,16 +70,16 @@ permalink: /membership/
             </div>
           </div>
         </div>
-        <div class="form-row" style="margin-bottom: 8px;">
+        <div class="form-row" style="margin-bottom: 8px;" v-if="!free_leader">
           <div class="membership-option" v-for="membership in membershipOptions" v-on:click="updateMembership(membership.name, membership.discount)" v-bind:class="membership_type === membership.name ? 'selected' : ''">
-            {{ membership.name }} {{ membership.amount }}
+            {{ membership.name }} {{ membership.amount }} {{membership.special}}
           </div>
         </div>
         <div class="error-text" v-if="errors.membership_type">
           {{ errors.membership_type[0] }}
         </div>
         <div style="margin-bottom: 35px; margin-top: 35px;">
-	  <label class="checkbox-container" v-if="!student">Set my Membership to Auto-renew
+	  <label class="checkbox-container" v-if="showAutoRenew">Set my Membership to Auto-renew
 	    <input type="checkbox" v-model="auto_renew">
 	    <span class="checkmark"></span>
 	  </label>
@@ -234,19 +87,35 @@ permalink: /membership/
 	    <input type="checkbox" v-model="mailing_list">
 	    <span class="checkmark"></span>
 	  </label>
+    <label class="checkbox-container">I am requesting Complimentary Membership for OWASP Leaders
+	    <input type="checkbox" v-model="free_leader">
+	    <span class="checkmark"></span>
+	  </label>
+    <div class='error-text' v-if="errors.free_leader">
+       {{ errors.free_leader[0] }}
+       <br>Please <a href='https://contact.owasp.org/'>Contact Us</a> if you feel this was in error.
+    </div>
+    <label class="checkbox-container" v-if="free_leader">I agree to be bound by the <a href="https://owasp.org/www-policy/legal/leaders-commitment-agreement">Leader Agreement</a>
+	    <input type="checkbox" v-model="free_leader_agreement">
+	    <span class="checkmark"></span>
+	  </label>
+    <div class='error-text' v-if="errors.free_leader_agreement">
+       {{ errors.free_leader_agreement[0] }}
+    </div>
         </div>
         <div class="membership-fields">
           <h3>Your Information</h3>
+	  <h4>Please use the same email address you used previously if renewing</h4>
           <div>
             <input type="text" v-model="email" aria-label="Email Address"
-            placeholder="Email Address" />
+            placeholder="Member Email Address" />
             <div class="error-text" v-if="errors.email">
               {{ errors.email[0] }}
             </div>
           </div>
           <div>
             <input type="text" v-model="email_confirm" aria-label="Confirm Email
-            Address" placeholder="Confirm Email Address" />
+            Address" placeholder="Confirm Member Email Address" />
             <div class="error-text" v-if="errors.email_confirm">
               {{ errors.email_confirm[0] }}
             </div>
@@ -264,20 +133,22 @@ permalink: /membership/
             </div>
           </div>
           <div>
-            <input type="text" v-model="name_on_card" aria-label="Name" placeholder="Name" />
+            <input type="text" v-model="name_on_card" aria-label="Name" placeholder="Member Name" />
             <div class="error-text" v-if="errors.name_on_card">
               {{ errors.name_on_card[0] }}
             </div>
           </div>
         </div>
         <div class="submit-container">
-          <button type="submit" class="membership-button" v-bind:disabled="loading">Join Now</button>
+          <button type="submit" class="membership-button" v-bind:disabled="loading"><div v-if="!loading">Submit</div><div class='spinner' v-if="loading"><div class='inner-spinner' v-if="loading"></div>
+        </div></button>
         </div>
+        
       </form>
 
-      <p class="legal-text">By submitting this form, you are consenting to receive communications from the OWASP Foundation concerning the status of your membership. Membership Dues are not prorated nor can they be cancelled once purchased. Discounted and <a href="/membership?student=yes">Student Memberships</a> are only offered to qualifying individuals. Fraudulent membership submissions will be revoked without notice for no refund. You can elect to receive marketing mails from us by also selecting "Join the OWASP Marketing Mail List." Marketing mails include information and special offers for upcoming conferences, meetings, and other opportunities offered to you. You can revoke your consent to receive Marketing Mail List emails at any time by using the Unsubscribe link found at the bottom of these emails.</p>
+      <p class="legal-text">By submitting this form, you are consenting to receive communications from the OWASP Foundation concerning the status of your membership and agree to adhere to the OWASP Foundation <a href="/www-policy/operational/code-of-conduct">Code of Conduct</a>. Membership Dues are not prorated nor can they be cancelled once purchased. Discounted and <a href="/membership?student=yes">Student Memberships</a> are only offered to qualifying individuals. Fraudulent membership submissions will be revoked without notice for no refund. You can elect to receive marketing mails from us by also selecting "Join the OWASP Marketing Mail List." Marketing mails include information and special offers for upcoming conferences, meetings, and other opportunities offered to you. You can revoke your consent to receive Marketing Mail List emails at any time by using the Unsubscribe link found at the bottom of these emails.</p>
 
-      <!-- end memberhip form -->
+      <!-- end membership form -->
 
       </div>
       <aside class="sidebar" role="complementary">
@@ -294,7 +165,7 @@ permalink: /membership/
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
-var stripe = Stripe('pk_test_u4OyMFMbz6tp9sit2bjdHRnT00bac5mrL2');
+var stripe = Stripe('pk_live_mw0B2kiXQTFkD44liAEI03oT00S5AGfSV3');
 window.addEventListener('load', function () {
   new Vue({
     el: '#membership-app',
@@ -314,7 +185,9 @@ window.addEventListener('load', function () {
       university: null,
       auto_renew: false,
       student: false,
-      mailing_list: false
+      mailing_list: false,
+      free_leader: false,
+      free_leader_agreement: false,
     },
     created: function () {
       const queryParams = new URLSearchParams(window.location.search);
@@ -324,36 +197,53 @@ window.addEventListener('load', function () {
         this.membership_discount = false;
         this.$forceUpdate();
       }
+      if(queryParams.has('email')){
+        this.email = queryParams.get('email')
+        
+      }
     },
     computed: {
+      showAutoRenew: function () {
+        return !this.student && this.membership_type == 'One Year'
+      },
       membershipOptions: function () {
-        if (this.student) {
+        
+        if (!this.country || !this.country.hasOwnProperty('discount') ||
+        this.country.discount == false) {
+	  if (this.student) {
           return [
             { name: 'One Year', amount: '$20', discount: false }
           ];
-        }
-        if (!this.country || !this.country.hasOwnProperty('discount') ||
-        this.country.discount == false) {
+        } else {
           return [
             { name: 'One Year', amount: '$50', discount: false },
             { name: 'Two Year', amount: '$95', discount: false },
-            { name: 'Lifetime', amount: '$500', discount: false }
+            { name: 'Lifetime', amount: '$500', discount: false}
           ];
+	  }
         } else {
+	  if (this.student) {
           return [
-            { name: 'One Year', amount: '$20', discount: true }
+            { name: 'One Year', amount: '$8', discount: true }
+          ];
+          }else{
+          return [
+            { name: 'One Year', amount: '$20', discount: true }, 
+            { name: 'Two Year', amount: '$35', discount: true }, 
+            { name: 'Lifetime', amount: '$200', discount: true} 
           ]
+	  }
         }
       }
     },
     watch: {
       country: function (newCountry, oldCountry) {
-        if (this.student) {
-          return;
-        }
+        // if (this.student) {
+        //   return;
+        // }
 
         if (newCountry.discount) {
-          this.membership_type = 'One Year';
+          //this.membership_type = 'One Year';
           this.membership_discount = true;
           this.$forceUpdate();
         } else if (oldCountry && oldCountry.discount) {
@@ -365,11 +255,17 @@ window.addEventListener('load', function () {
     },
     methods: {
       handleSubmit: function () {
+        
+        if (this.free_leader){
+          return this.handleLeaderSubmit();
+        }
+
         this.loading = true;
         this.validateForm();
-
+        
         if (Object.keys(this.errors).length > 0) {
           this.loading = false;
+          //this works...why not in the axios post?
           this.$nextTick(function () {
             document.getElementById('error-message').scrollIntoView();
           })
@@ -386,6 +282,7 @@ window.addEventListener('load', function () {
             company: this.company_name,
             university: this.university,
             mailing_list: this.mailing_list,
+            free_leader: this.free_leader,
             student: this.student,
             currency: 'usd'
           };
@@ -400,9 +297,80 @@ window.addEventListener('load', function () {
             .catch(function (error) {
               vm.errors = error.response.data.errors
               vm.loading = false
-              vm.$nextTick(function () {
+              vm.$nextTick(function(){
                 document.getElementById('error-message').scrollIntoView();
               })
+            });
+        }
+      },
+      handleLeaderSubmit: function() {
+        this.loading = true;
+        this.validateForm();
+          // check the function call for free leader, if not leader, give error
+        if (Object.keys(this.errors).length > 0) {
+          this.loading = false;
+          //this works...why not in the axios post?
+          this.$nextTick(function () {
+            document.getElementById('error-message').scrollIntoView();
+          })
+        } else {
+          const postData = {
+            checkout_type: 'membership',
+            membership_type: 'complimentary',
+            discount: this.membership_discount,
+            recurring: this.auto_renew,
+            country: this.country['name'],
+            postal_code: this.postal_code,
+            email: this.email,
+            name: this.name_on_card,
+            company: this.company_name,
+            university: this.university,
+            mailing_list: this.mailing_list,
+            free_leader: this.free_leader,
+            student: this.student,
+            leader_agreement: this.free_leader_agreement,
+            currency: 'usd'
+          };
+          let errors = {}
+          // so instead of this...just create the membership? https://owaspadmin.azurewebsites.net/api/IsLeaderByEmail?code=yGSVCT1EaQHhLsVhbF6zEiOUninaB/jT4CIO9OyNdqg7lVmr8J4jLA==
+          axios.post('https://owaspadmin.azurewebsites.net/api/CreateLeaderMembership?code=4ooIeXPupxNPTpIXRsPEiIDEhpeuTmr9wmsURjLHXCm3YFozQHfNwA==', postData)
+            .then(response => {
+              
+              if(response.data.error){
+                errors = [response.data.error]
+                this.errors = errors
+                if (response.data.error.indexOf('agreement') > 0)
+                  errors.free_leader_agreement = [response.data.error];
+                else
+                  errors.free_leader = [response.data.error];
+              }
+              else{
+                //success case?
+                this.$nextTick(function () {
+                    document.location.href = "/membership-success"
+                  })
+              }
+              this.loading = false
+              if (Object.keys(this.errors).length > 0) {
+                this.loading = false;
+                
+                this.$nextTick(function () {
+                  document.getElementById('error-message').scrollIntoView();
+                })
+              }
+            })
+            .catch(error => {
+              errors = [error]
+              errors.free_leader = [error]
+              this.errors = errors
+              this.loading = false
+              if (Object.keys(this.errors).length > 0) {
+                this.loading = false;
+                
+                this.$nextTick(function () {
+                  document.getElementById('error-message').scrollIntoView();
+                })
+              }
             });
         }
       },
@@ -412,10 +380,14 @@ window.addEventListener('load', function () {
         this.$forceUpdate();
       },
       validateForm: function () {
-        let errors = {};
+        let errors = {};        
 
-        if (!this.membership_type) {
+        if (!this.membership_type && !this.free_leader) {
           errors.membership_type = ['Please select a membership type.'];
+        }
+
+        if(this.free_leader && !this.free_leader_agreement){
+          errors.free_leader_agreement = ['You must accept the leader agreement.']
         }
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
@@ -426,8 +398,16 @@ window.addEventListener('load', function () {
           errors.email_confirm = ['Both email addresses must match.'];
         }
 
-        if (!this.name_on_card) {
-          errors.name_on_card = ['Please enter your name as it appears on your credit card.'];
+        if(!this.name_on_card) {
+          errors.name_on_card = ['Please enter you first and last name.'];
+        }
+        else {
+          fname = this.name_on_card.substr(0, this.name_on_card.indexOf(' '));
+          lname = this.name_on_card.substr(this.name_on_card.indexOf(' ') + 1);
+
+          if (!fname || !lname) {
+            errors.name_on_card = ['Please enter your first and last name.'];
+          }
         }
 
         if (this.student && !this.university) {

@@ -272,6 +272,10 @@
         "discount": true
     },
     {
+        "name": "Falkland Islands",
+        "discount": true
+    },    
+    {
         "name": "Faroe Islands",
         "discount": true
     },
@@ -724,7 +728,7 @@
         "discount": true
     },
     {
-        "name": "South Sudan",
+        "name": "South Africa",
         "discount": true
     },
     {
@@ -778,6 +782,10 @@
     {
         "name": "Tanzania",
         "discount": true
+    },
+    {
+        "name": "Taiwan",
+        "discount": false
     },
     {
         "name": "Thailand",

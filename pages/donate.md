@@ -1,7 +1,7 @@
 ---
 
 layout: full-width
-title: Donate
+title: Donate to Open Source Security Projects
 permalink: /donate/
 
 ---
@@ -216,7 +216,7 @@ permalink: /donate/
       <h1>Donate to the OWASP Foundation</h1>
 
       <p>The Open Web Application Security Project (OWASP) is a nonprofit
-      foundation improving the security of software. Through community-led open
+      foundation that works to improve the security of software. Through community-led open
       source software projects and hundreds of local chapters worldwide, your gift* will support the Foundation and its many activities
       around the world to secure the web. Existing donors can <a href="/manage-membership">Modify Recurring Gifts</a>.</p>
 
@@ -308,10 +308,16 @@ permalink: /donate/
           </div>
         </div>
         <div class="donation-options" v-if="showRestrictedOption">
-          <label class="checkbox-container">Please restrict this gift<span v-if="projectName"> for <span style="font-weight: 900; color: #233e81">{{ projectName }}</span></span>. In doing so, I understand this gift amount is net 15% administration costs and unspent restricted gift balances become unrestricted at the end of each calendar year.
+          <label class="checkbox-container">Please restrict this gift<span v-if="projectName"> for <span style="font-weight: 900; color: #233e81">{{ projectName }}</span></span>. In doing so, I understand this gift amount is net 10% administration costs and unspent restricted gift balances become unrestricted at the end of each calendar year.
 	    <input type="checkbox" v-model="restricted">
 	    <span class="checkmark"></span>
 	  </label>
+        </div>
+        <div style="margin-bottom: 30px;">
+          <vue-recaptcha sitekey="6LfsuK4ZAAAAAOEQWvk5zkD9K00uURbviflRH_8M" v-on:verify="onVerifyCaptcha" ref="recaptcha" v-on:expired="onExpiredCaptcha" v-on:error="onCaptchaError" v-bind:load-recaptcha-script="true"></vue-recaptcha>
+          <div class="error-text" v-if="errors.recaptcha">
+            {{ errors.recaptcha[0] }}
+          </div>
         </div>
         <div class="submit-container">
           <button type="submit" class="donate-button" v-bind:disabled="loading">Donate</button>
@@ -320,7 +326,7 @@ permalink: /donate/
 
       <p class="legal-text">* Unless otherwise noted your gift to the OWASP Foundation, net credit card processing fees,
       is unrestricted and will be used at the sole discretion of the
-      organization to fulfill its mission and objectives. You do have the option
+      organization to fulfill its mission and objectives. Read more about our <a href="/www-policy/operational/donations" target="_blank" rel="noopener">Donation Policy</a>. You do have the option
       to be listed as a Supporter of a Project or Chapter; however, this option
       does not restrict your gift in anyway whatsoever. The OWASP Foundation is
       a 501(c)3 therefore in some cases your gift may be tax-deductible and you
@@ -340,15 +346,20 @@ permalink: /donate/
 
 {% endraw %}
 
+<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit"></script>
 <script src="https://js.stripe.com/v3"></script>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue-recaptcha@latest/dist/vue-recaptcha.min.js"></script>
 
 <script>
-var stripe = Stripe('pk_test_u4OyMFMbz6tp9sit2bjdHRnT00bac5mrL2');
+var stripe = Stripe('pk_live_mw0B2kiXQTFkD44liAEI03oT00S5AGfSV3');
 window.addEventListener('load', function () {
   new Vue({
     el: '#donate-app',
+    components: {
+      VueRecaptcha: window.VueRecaptcha
+    },
     data: {
       amount: 50,
       isCustomAmount: false,
@@ -364,6 +375,7 @@ window.addEventListener('load', function () {
       name: null,
       source: null,
       loading: false,
+      recaptchaVerified: false,
       errors: {}
     },
     computed: {
@@ -378,7 +390,7 @@ window.addEventListener('load', function () {
         return '&#163;';
       },
       showRestrictedOption: function () {
-        if (this.amount > 1000) {
+        if (this.amount >= 1000) {
           return true;
         }
         return false;
@@ -386,7 +398,7 @@ window.addEventListener('load', function () {
     },
     watch: {
       amount: function (newAmount) {
-        if (newAmount <= 1000) {
+        if (newAmount < 1000) {
           this.restricted = false;
         }
       }
@@ -421,36 +433,7 @@ window.addEventListener('load', function () {
             document.getElementById('error-message').scrollIntoView();
           })
         } else {
-          const postData = {
-            checkout_type: 'donation',
-            amount: vm.amount,
-            currency: vm.currency,
-            recurring: vm.recurring,
-            attribution: vm.attribution,
-            project_title: vm.projectName,
-            repo_name: vm.repoName,
-            mailing_list: vm.mailing_list,
-            restricted: vm.restricted,
-            email: vm.email,
-            name: vm.name,
-            source: vm.source
-          };
-
-          axios.post('https://owaspadmin.azurewebsites.net/api/CreateCheckoutSession?code=ulMNYVfgzBytI1adat1lS6MQ3NabtwKE4IgCJ8yKuhvbFoQh6nOYaw==', postData)
-            .then(function (response) {
-	      stripe.redirectToCheckout({
-		sessionId: response.data.data.session_id
-	      }).then(function (result) {
-                console.log(result.error.message)
-	      }); 
-            })
-            .catch(function (error) {
-              vm.errors = error.response.data.errors
-              vm.loading = false
-              vm.$nextTick(function () {
-                document.getElementById('error-message').scrollIntoView();
-              })
-            });
+          this.onSubmit();
         }
       },
       changeCurrency: function (currency) {
@@ -476,11 +459,11 @@ window.addEventListener('load', function () {
           errors.amount = ['Please select a donation amount.'];
         } else {
           if ((typeof this.amount === 'string' || this.amount instanceof String) && !this.amount.match(/^-{0,1}\d+$/)) {
-            errors.amount = ['Donation amounts must be whole numbers between 1 and 5000 with no commas or decimals.'];
+            errors.amount = ['Donation amounts must be whole numbers greater than 10 with no commas or decimals.'];
           } else {
             let intAmount = parseInt(this.amount)
-            if (intAmount < 1 || intAmount > 5000) {
-              errors.amount = ['Donation amounts must be whole numbers between 1 and 5000 with no commas or decimals.'];
+            if (intAmount < 10 ) {
+              errors.amount = ['Donation amounts must be whole numbers greater than 10 with no commas or decimals.'];
             }
           }
         }
@@ -497,7 +480,54 @@ window.addEventListener('load', function () {
           errors.name = ['Please enter your name as it appears on your credit card.'];
         }
 
+        if (!this.recaptchaVerified) {
+          errors.recaptcha = ['Please complete the captcha challenge.'];
+        }
+
         this.errors = errors;
+      },
+      onSubmit: function () {
+        let vm = this;
+        const postData = {
+          checkout_type: 'donation',
+          amount: vm.amount,
+          currency: vm.currency,
+          recurring: vm.recurring,
+          attribution: vm.attribution,
+          project_title: vm.projectName,
+          repo_name: vm.repoName,
+          mailing_list: vm.mailing_list,
+          restricted: vm.restricted,
+          email: vm.email,
+          name: vm.name,
+          source: vm.source
+        };
+
+        axios.post('https://owaspadmin.azurewebsites.net/api/CreateCheckoutSession?code=ulMNYVfgzBytI1adat1lS6MQ3NabtwKE4IgCJ8yKuhvbFoQh6nOYaw==', postData).then(function (response) {
+          stripe.redirectToCheckout({
+            sessionId: response.data.data.session_id
+          }).then(function (result) {
+            console.log(result.error.message)
+          }); 
+        }).catch(function (error) {
+          vm.errors = error.response.data.errors
+          vm.loading = false
+          vm.$nextTick(function () {
+            document.getElementById('error-message').scrollIntoView();
+          })
+        });
+      },
+      onVerifyCaptcha: function () {
+        this.recaptchaVerified = true;
+        this.$delete(this.errors, 'recaptcha');
+      },
+      onExpiredCaptcha: function () {
+        this.recaptchaVerified = false;
+        this.$refs.recaptcha.reset()
+      },
+      onCaptchaError: function () {
+        this.recaptchaVerified = false;
+        this.$refs.recaptcha.reset()
       }
     }
   })
