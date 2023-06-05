@@ -1,4 +1,4 @@
-# owasp.github.io
+# owasp-foundation.github.io
 OWASP Foundation main site repository
 
 [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
