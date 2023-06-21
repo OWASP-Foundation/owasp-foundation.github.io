@@ -1,0 +1,1 @@
+{ "kid": "a39deff9ba007", public: "12345" }
