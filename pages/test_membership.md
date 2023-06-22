@@ -1,6 +1,6 @@
 ---
 
-layout: col-sidebar
+layout: col-generic
 title: OWASP Membership Portal
 tags: OWASP membership, owspmem
 maintenance: false
