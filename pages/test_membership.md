@@ -604,7 +604,7 @@ window.addEventListener('load', function() {
             authtoken: Cookies.get("CF_Authorization"),
           },
         };
-        alert(Cookies.get("CF_Authorization"))
+        
         axios
           .get(
             "https://owaspadmin.azurewebsites.net/api/get-member-info?code=mWP6TjdDSJZOQIZQNtb2fUPuzuIamwaobBZUTnN24JEdtFybiTDl7A==",
