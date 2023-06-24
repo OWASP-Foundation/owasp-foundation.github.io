@@ -600,7 +600,7 @@ button {
     </div>
     <!-- end leader section -->
     <!-- start billing section -->
-    <div class="info-section" v-if="membership_data && membersubs && membersubs.length > 0 && mode == 0">
+    <div class="info-section" v-if="membership_data && membership_data.subscriptions && membership_data.subscriptions.length > 0 && mode == 0">
       <h3 class="section-label">Billing Information</h3>               
           <div v-if="membersubs.length > 0" style="margin-bottom: 40px;">
             <h3>Manage Recurring Membership</h3>
