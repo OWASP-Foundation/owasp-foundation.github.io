@@ -173,8 +173,8 @@ button {
         </div>
     </div>    
     <div id='email-provisioned' class="info-section" v-if="provision_email_message == true">
-        <h3>Your Email was Created</h3>
-        Please go to <a href="https://mail.google.com">Google Mail</a> and logout of any current account or click Add another account.  Choose 'Forgot password' and 'try another way' then 'receive a verification code'.
+        <h3 class="section-label">Your Email was Created</h3>
+        To access your OWASP email, please go to <a href="https://mail.google.com">Google Mail</a> and logout of any current account OR click Add another account.  Choose 'Forgot password' and 'try another way' then 'receive a verification code'.
     </div>
     <!-- end email section -->
     <div class="info-section" v-if="member_ready && mode == 0">
