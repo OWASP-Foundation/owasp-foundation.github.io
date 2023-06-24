@@ -172,8 +172,9 @@ button {
           <button class="cta-button" v-on:click="redirectToAzure()" v-bind:disabled="provision_disabled">{{provision_message}}</button>
         </div>
     </div>    
-    <div v-if="provision_email_message == true">
-        <h2>Your chosen email was created.  Please go to <a href="https://mail.google.com">Google Mail</a> and logout of any current account or click Add another account.  Choose 'Forgot password' and 'try another way' then 'receive a verification code'.</h2>
+    <div id='email-provisioned' class="info-section" v-if="provision_email_message == true">
+        <h3>Your Email was Created</h3>
+        Please go to <a href="https://mail.google.com">Google Mail</a> and logout of any current account or click Add another account.  Choose 'Forgot password' and 'try another way' then 'receive a verification code'.
     </div>
     <!-- end email section -->
     <div class="info-section" v-if="member_ready && mode == 0">
