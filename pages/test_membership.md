@@ -672,6 +672,39 @@ window.addEventListener('load', function() {
     },
     created: function () {
       if (this.loading) {
+        this.getMemberInfo();        
+      } // end if loading
+    },
+    computed: {
+      membersubs: function () {
+        return _.filter(_.get(this.membership_data, 'subscriptions', []), { type: 'membership' });
+      },
+      donations: function () {
+        return _.filter(_.get(this.membership_data, 'subscriptions', []), { type: 'donation' });
+      },
+      member_ready() {
+        return (
+          !this.loading &&
+          this.membership_data != null &&
+          this.membership_data.name
+        );
+      },
+      renewal_near() {
+        if (this.membership_data.membership_end) {
+          var dt = Date.parse(this.membership_data.membership_end);
+          var diff = Math.abs(dt - Date.now());
+          return true; // for now just show the button, regardless of if the end date is withint 30 days diff / (1000 * 60 * 60 * 24) < 30;
+        } else return false;
+      },
+      renewal_link() {
+        if(this.membership_data.membership_email)
+          return "https://owasp.org/membership?email=" + this.membership_data.membership_email;
+        else
+          return "https://owasp.org/membership/"
+      }
+    },
+    methods: {
+      getMemberInfo: function () {
         const postData = {
           params: {
             authtoken: Cookies.get("CF_Authorization"),
@@ -771,37 +804,8 @@ window.addEventListener('load', function() {
 
             this.$forceUpdate();
           });
-      } // end if loading
-    },
-    computed: {
-      membersubs: function () {
-        return _.filter(_.get(this.membership_data, 'subscriptions', []), { type: 'membership' });
-      },
-      donations: function () {
-        return _.filter(_.get(this.membership_data, 'subscriptions', []), { type: 'donation' });
-      },
-      member_ready() {
-        return (
-          !this.loading &&
-          this.membership_data != null &&
-          this.membership_data.name
-        );
-      },
-      renewal_near() {
-        if (this.membership_data.membership_end) {
-          var dt = Date.parse(this.membership_data.membership_end);
-          var diff = Math.abs(dt - Date.now());
-          return true; // for now just show the button, regardless of if the end date is withint 30 days diff / (1000 * 60 * 60 * 24) < 30;
-        } else return false;
-      },
-      renewal_link() {
-        if(this.membership_data.membership_email)
-          return "https://owasp.org/membership?email=" + this.membership_data.membership_email;
-        else
-          return "https://owasp.org/membership/"
       }
-    },
-    methods: {
+
       validate: function () {
         this.errors = [];
 
@@ -1022,7 +1026,7 @@ window.addEventListener('load', function() {
           };
           axios.post('https://owaspadmin.azurewebsites.net/api/CancelSubscription?code=Wo2wqKKpOMZP0LycmMGWLl3z8wGqK0BoIPRL/3At9W31ZnHZSRn8xw==', postData)
             .then(function (response) {
-              vm.loadingUserData = true;
+              vm.loading = true;
               vm.getMemberInfo();
             }).finally(function () {
               vm.pendingCancellation = null;
