@@ -650,6 +650,7 @@ button {
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
 <script>
+var stripe = Stripe('pk_live_mw0B2kiXQTFkD44liAEI03oT00S5AGfSV3');
 window.addEventListener('load', function() {
   new Vue({
     el: '#membership-portal-app',
