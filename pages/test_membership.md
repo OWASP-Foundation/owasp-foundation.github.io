@@ -1007,8 +1007,6 @@ window.addEventListener('load', function() {
   
       },
       redirectToStripe: function (sessionId) {
-        alert("redirectToStripe");
-        return;
         stripe.redirectToCheckout({
           sessionId: sessionId
         }).then(function (result) {
@@ -1021,8 +1019,6 @@ window.addEventListener('load', function() {
           const postData = {
             token: sessionId
           };
-          alert("I did !");
-          return;
           axios.post('https://owaspadmin.azurewebsites.net/api/CancelSubscription?code=Wo2wqKKpOMZP0LycmMGWLl3z8wGqK0BoIPRL/3At9W31ZnHZSRn8xw==', postData)
             .then(function (response) {
               vm.loadingUserData = true;
