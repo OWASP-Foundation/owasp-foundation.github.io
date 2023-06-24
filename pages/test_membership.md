@@ -804,8 +804,7 @@ window.addEventListener('load', function() {
 
             this.$forceUpdate();
           });
-      }
-
+      },
       validate: function () {
         this.errors = [];
 
